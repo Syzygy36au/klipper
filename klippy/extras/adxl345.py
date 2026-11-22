@@ -21,6 +21,7 @@ QUERY_RATES = {
 }
 
 ADXL345_DEV_ID = 0xe5
+ADXL346_DEV_ID = 0xe6
 SET_FIFO_CTL = 0x90
 
 FREEFALL_ACCEL = 9.80665 * 1000.
@@ -276,7 +277,7 @@ class ADXL345:
         # In case of miswiring, testing ADXL345 device ID prevents treating
         # noise or wrong signal as a correctly initialized device
         dev_id = self.read_reg(REG_DEVID)
-        if dev_id != ADXL345_DEV_ID:
+        if dev_id != ADXL345_DEV_ID and dev_id != ADXL346_DEV_ID:
             raise self.printer.command_error(
                 "Invalid adxl345 id (got %x vs %x).\n"
                 "This is generally indicative of connection problems\n"
